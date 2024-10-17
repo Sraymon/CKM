@@ -6,15 +6,22 @@
     android:gravity="center"
     android:padding="16dp">
 
+
     <!-- Display the logged-in user's email -->
     <TextView
         android:id="@+id/accountInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Account Information"
-        android:textSize="20sp"
+        android:textSize="37sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        />
+
 
     <!-- Email -->
     <TextView

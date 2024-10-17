@@ -15,15 +15,16 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.login_page_activity)
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
-        // Get references to the EditTexts and Button
+        // Get references to the EditTexts and Buttons
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val loginButton: Button = findViewById(R.id.loginButton)
+        val signUpButton: Button = findViewById(R.id.signupButton) // The Sign Up button
 
         // Handle Login Button click
         loginButton.setOnClickListener {
@@ -32,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
 
             // Call Firebase login method
             loginUser(email, password)
+        }
+
+        // Handle Sign Up Button click - Navigate to SignUpActivity
+        signUpButton.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 

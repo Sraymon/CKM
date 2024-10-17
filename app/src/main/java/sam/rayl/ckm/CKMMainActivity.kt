@@ -9,7 +9,7 @@ class CKMMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ckmmainactivity)  // Updated to match your layout file name
+        setContentView(R.layout.ckmmainactivity)  // Ensure this matches your layout file name
 
         // Get reference to the "Get Started" button
         val getStartedButton: Button = findViewById(R.id.getStartedButton)

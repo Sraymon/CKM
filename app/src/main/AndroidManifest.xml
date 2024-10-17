@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions to access the internet and network state -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:supportsRtl="true"
         android:theme="@style/Theme.CKM"
         tools:targetApi="31">
@@ -26,6 +27,8 @@
         <!-- Account Activity -->
         <activity android:name=".AccountActivity" />
 
-    </application>
+        <!-- Sign Up Activity -->
+        <activity android:name=".SignUpActivity" />
 
+    </application>
 </manifest>
