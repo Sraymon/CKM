@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "697867046395",
+    "project_id": "ckm-ecee4",
+    "storage_bucket": "ckm-ecee4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697867046395:android:9c996c2bbde9a335218f5e",
+        "android_client_info": {
+          "package_name": "sam.rayl.ckm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0thMBhXjDQvT9O08yuDkEUJHPehBmQT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

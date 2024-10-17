@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@drawable/quick_food_background"> <!-- Updated background reference -->
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi, Welcome to Quick Food Finder!"
+        android:textSize="28sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:shadowColor="#000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="3"/>
+
+    <!-- Description Text -->
+
+    <!-- Get Started Button -->
+
+    <TextView
+        android:id="@+id/appDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/secondary_text_dark"
+        android:gravity="bottom"
+        android:padding="30dp"
+        android:text="Quick Food Finder helps you discover delicious meals around you and connect with food lovers. Share food pics, connect with friends, and find your next meal quickly!"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/getStartedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/secondary_text_dark"
+        android:textStyle="bold"
+        android:elevation="8dp"
+        android:padding="20dp"
+        android:text="Get Started"
+        android:textColor="@color/black" />
+
+</LinearLayout>
