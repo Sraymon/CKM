@@ -25,10 +25,13 @@
         <activity android:name=".LoginActivity" />
 
         <!-- Account Activity -->
-        <activity android:name=".AccountActivity" />
+        <activity android:name=".UserProfileActivity" />
 
         <!-- Sign Up Activity -->
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".NextActivity" />
+
+
 
     </application>
 </manifest>

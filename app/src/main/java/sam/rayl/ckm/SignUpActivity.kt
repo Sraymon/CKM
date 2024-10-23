@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +25,15 @@ class SignUpActivity : AppCompatActivity() {
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val createAccountButton: Button = findViewById(R.id.createAccountButton)
+
+        // Handle Back Button click (Navigate back to LoginActivity)
+        val backButton: ImageButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            // Go back to LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()  // Close the SignUpActivity
+        }
 
         // Handle Create Account Button click
         createAccountButton.setOnClickListener {
@@ -59,7 +69,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Account creation successful, navigate to AccountActivity
-                    val intent = Intent(this, AccountActivity::class.java)
+                    val intent = Intent(this, UserProfileActivity::class.java)
                     intent.putExtra("email", email) // Optionally pass user email to next activity
                     startActivity(intent)
                     finish() // Close SignUpActivity to prevent going back
