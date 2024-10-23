@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    android:background="@drawable/quick_food_sign_up">
+    android:background="@drawable/g">
 
     <!-- Name Input -->
 <EditText

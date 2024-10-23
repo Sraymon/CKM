@@ -8,7 +8,7 @@ class AccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.account_info_activity)
+        setContentView(R.layout.user_profile_page)
 
         // Get the email passed from the LoginActivity
         val email = intent.getStringExtra("email")
