@@ -2,19 +2,19 @@ package sam.rayl.ckm
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class CKMMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ckmmainactivity)  // Ensure this matches your layout file name
+        setContentView(R.layout.ckmmainactivity)  // Make sure this layout file exists
 
-        // Get reference to the "Get Started" button
+        // Reference the Get Started button
         val getStartedButton: Button = findViewById(R.id.getStartedButton)
 
-        // Set click listener to navigate to LoginActivity
+        // Set click listener for the Get Started button
         getStartedButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
