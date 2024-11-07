@@ -1,0 +1,535 @@
+openapi: 3.0.3
+info:
+  version: '2.1.0'
+  title: 'LogMeal v2 Documentation'
+  description: "This document is intended to provide all the needed knowledge to communicate with LogMeal's API as well
+  as the description of all the available endpoints.
+
+
+  To <strong>get started and see code examples</strong> please visit our <a href='https://api.logmeal.com/tutorial/' target='_blank'>tutorial</a>.
+
+
+  For <strong>logging in to your APICompany user account</strong> visit our <a href='https://www.logmeal.com' target='_blank'>web page</a>.
+
+
+  To view the documentation for an older API version click any of the following links: <a href='https://api.logmeal.com/v1/docs/'>v1</a>, <a href='https://api.logmeal.com/v0/docs/'>v0</a>.
+
+
+  <strong>Depending on the LogMeal plan you are subscribed to a different set of endpoints will be accessible for you. Check our <a href='https://logmeal.com/api/pricing/' target='_blank'>pricing</a> page to see a list of the features we have available for each plan.</strong>
+
+
+  The endpoints described in this document might only be accessible by specific types of users (based on the token used). Each endpoint has an icon representing which types of users are allowed to use it, among the following:
+
+    - ⚫ <strong>APICompany</strong>: global manager users that are in charge of creating other users among other things (only one is available per account).
+
+    - 🔴 <strong>APIUser</strong>: specific final users for the application that you are building. Thus, a different APIUser must be created for each final user that accesses LogMeal’s services through your application/software.
+
+    - 🔵 <strong>APIUserManager</strong>: user capable of visualizing the intake history for multiple APIUsers (could be assigned to a nutritionist/clinician/manager).
+
+
+  Some of our endpoints have some call limitations in place. The endpoints with limitations will have the ⏱ icon next to their summary, meaning that they will have at least one of the following limitations:
+
+  * <span style='color:red; font-size: 1.2em; font-weight: bold;'>(M)</span> Endpoints with a <strong>limited amount of monthly calls</strong> based on your LogMeal Plan, <strong>shared among all of your users</strong>. Calls that exceed your monthly limit will be charged as extra credits. The endpoints with this limitation will also be labeled with a ⭐ icon.
+
+  * <span style='color:orange; font-size: 1.2em; font-weight: bold;'>(D)</span> Endpoints with a <strong>limited amount of daily calls</strong> based on your LogMeal Plan, <strong>applied to each user separately</strong>. Calls that exceed the daily limit won't be processed (error code **429**).
+
+  * <span style='color:purple; font-size: 1.2em; font-weight: bold;'>(S)</span> Endpoints with a <strong>limited amount of calls per second</strong> based on your LogMeal Plan, <strong>applied to each user separately</strong>. Calls that exceed the request rate limit won't be processed (error code **429**).
+
+
+  You will be able to find the specific limitations inside the description of each endpoint with the ⏱ icon.
+
+
+  *<strong>Note:</strong> You can check your current account limitations by using one of the <strong>Informative endpoints</strong>.*
+
+
+  "
+  # ALL AVAILABLE COLOUR SYMBOLS: ⚫ ⚪ 🔵🔴🟠🟡🟢🟣🟤🟦🟥🟧🟨🟩🟪🟫🛑🔶🔷🔸🔹🔺🔻
+  #    ⚫🔴⚪⏱⭐
+  contact:
+    email: "contact@logmeal.com"
+servers:
+  - url: https://api.logmeal.com
+  #- url: https://staging.api.logmeal.com
+  #- url: http://localhost:8080
+  #  description: staging server
+#schemes:
+# - http
+#consumes:
+#  - "application/json"
+#produces:
+#  - "application/json"
+tags:
+  #- name: "Authentication"
+  #  description: ""
+
+  - name: "Informative Endpoints"
+    description: "Endpoints that provide useful information about the LogMeal API"
+
+  - name: "APIUsers Management"
+    description: "Endpoints that allow APICompanies to manage their APIUsers"
+    externalDocs:
+      description: "These endpoints are all limited to APICompany ⚫ tokens"
+      url: "https://logmeal.com/api/user-types/"
+
+  - name: "APIUsers Profile Management"
+    description: "Endpoints that allow APIUsers to get and modify their profiles"
+    externalDocs:
+      description: "These endpoints are all limited to APIUser 🔴 tokens"
+      url: "https://logmeal.com/api/user-types/"
+
+  - name: "API and Models Versioning Functions"
+    description: "Endpoints that provide information about the available versions of the API and our Models"
+    externalDocs:
+      description: "Available to both APICompany ⚫ and APIUser 🔴 tokens"
+      url: "https://logmeal.com/api/services/"
+
+  - name: "Dataset Information, Recognized Dishes and Others"
+    description: "Endpoints that provide information about our datasets"
+
+  - name: "Image-based Food Recognition"
+    description: "Endpoints related to applying food recognition on images"
+    externalDocs:
+      description: "These endpoints are all limited to APIUser 🔴 tokens"
+      url: "https://logmeal.com/api/several-dishes-recognition/"
+
+  - name: "Nutritional Information"
+    description: "Endpoints related to the nutritional information services"
+    externalDocs:
+      description: "⚡ Endpoints limited to Analyse plan or higher ⚡"
+      url: "https://logmeal.com/api/nutritional-information/"
+
+  - name: "Measures and Easy Modulation"
+    description: "Endpoints with information about cooking measures and easy modulation"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/units-of-measurement/"
+
+  - name: "APIUserManager Endpoints"
+    description: "Endpoints that allow managing the APIUserManagers"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/external-management/"
+
+  - name: "Intake History"
+    description: "Endpoints related to the APIUser's intake history management and visualization"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/intakes-history/"
+
+  - name: "Custom Occasions"
+    description: "Endpoints related to managing custom occasions"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/custom-occasions/"
+
+  - name: "Nutritional Goals"
+    description: "Endpoints related to the APIUser's nutritional goals management"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/nutritional-goals/"
+
+  - name: "Custom Nutritional Indicators"
+    description: "Endpoints related to managing custom nutritional indicators"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/custom-nutritional-indicators/"
+
+  - name: "Custom Recipes"
+    description: "Create and assign custom recipes accessible by all the users in the company"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/custom-recipes/"
+
+  - name: "APIUser Favorite Meals"
+    description: "Endpoints related to the APIUser's favorite meals"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/favorite-meals/"
+
+  - name: "Body Measures"
+    description: "Endpoints to manage body measures"
+    externalDocs:
+      description: "⚡ Endpoints limited to Monitor plan or higher ⚡"
+      url: "https://logmeal.com/api/body-measurements/"
+
+  - name: "Intake Variety Score and Nutri-Scores"
+    description: "Endpoints related to the APIUser's intake variety and Nutri-Score services"
+    externalDocs:
+      description: "⚡ Endpoints limited to Recommend plan or higher ⚡"
+      url: "https://logmeal.com/api/variety-score/"
+
+  - name: "Recipe and Dish Recommendations"
+    description: "Endpoints related to the APIUser's recipe and dish recommendations services"
+    externalDocs:
+      description: "⚡ Endpoints limited to Recommend plan or higher ⚡"
+      url: "https://logmeal.com/api/recipe-recommendation/"
+
+  - name: "Food Quantity Estimation"
+    description: "Endpoints related to applying food segmentation and quantity estimation on images"
+    externalDocs:
+      description: "⚡ Endpoints limited to Recommend plan or higher ⚡"
+      url: "https://logmeal.com/api/quantity-estimation/"
+
+  - name: "Food Waste Estimation"
+    description: "Food waste estimation for dish leftovers and stored food waste disposal"
+    externalDocs:
+      description: "⚡ Endpoints limited to Custom plans ⚡"
+      url: "https://logmeal.com/api/waste-estimation/"
+
+paths:
+
+  ######################################### SWAGGER INSTRUCTIONS ##############################################
+  # Add the endpoint in the corresponding file inside the 'tags' folder. Each tag represents a section of the API
+  # documentation. In this file, add the endpoint url followed by the ref to the file where it is described. The
+  # ref starts with the file location and then the endpoint. The endpoint's backslashes (/) turn to ~1. This way the
+  # ref can differentiate between the file source backslashes and the endpoint's backslashes.
+  #############################################################################################################
+
+  ################################################
+  ##  Informative Endpoints
+  ################################################
+
+  /v2/info/limitations:
+    #$ref: './api/tags/informative_endpoints.yaml#~1v2~1info~1limitations'
+    #$ref: 'api/tags/informative_endpoints.yaml#~1v2~1info~1limitations'
+    #$ref: './api/tags/informative_endpoints.yaml#/v2/info/limitations'
+    $ref: './api/tags/informative/info_limitations.yaml'
+
+  /v2/info/services:
+    $ref: './api/tags/informative_endpoints.yaml#~1v2~1info~1services'
+
+  /v2/info/availableNutrients:
+    $ref: './api/tags/informative_endpoints.yaml#~1v2~1info~1availableNutrients'
+
+  /v2/info/languages:
+    $ref: './api/tags/informative_endpoints.yaml#~1v2~1info~1languages'
+
+  ################################################
+  ##  APICompany-related endpoints
+  ################################################
+
+  /v2/users/signUp:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1signUp'
+
+  /v2/users/APIUsers:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1APIUsers'
+
+  /v2/users/deleteAPIUser/{userId}:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1deleteAPIUser~1{userId}'
+
+  /v2/users/modifyUserProfileInfo/{userId}:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1modifyUserProfileInfo~1{userId}'
+
+  /v2/users/getUserProfileInfo/{userId}:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1getUserProfileInfo~1{userId}'
+
+  /v2/users/toggleEnabled/{userId}:
+    $ref: './api/tags/apiusers_management.yaml#~1v2~1users~1toggleEnabled~1{userId}'
+
+  ################################################
+  ##  Image recognition services
+  ################################################
+
+  /v2/image/recognition/type/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1recognition~1type~1{model_version}'
+
+  # /v2/image/recognition/dish/{model_version}:
+  #   $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1recognition~1type~1{model_version}'
+
+  # /v2/image/recognition/combo/{model_version}:
+  #   $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1recognition~1type~1{model_version}'
+
+  /v2/image/segmentation/complete/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1segmentation~1complete~1{model_version}'
+
+  /v2/image/recognition/complete/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1recognition~1complete~1{model_version}'
+
+  /v2/image/confirm/type/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1confirm~1type~1{model_version}'
+
+  /v2/image/confirm/food_group/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1confirm~1food_group~1{model_version}'
+
+  /v2/image/confirm/dish/{model_version}:
+    $ref: './api/tags/image_based_food_recognition.yaml#~1v2~1image~1confirm~1dish~1{model_version}'
+
+  ################################################
+  ##  Ingredients and nutritional information
+  ################################################
+
+  /v2/nutrition/recipe/ingredients/{model_version}:
+    $ref: './api/tags/ingredients_and_nutritional_information.yaml#~1v2~1nutrition~1recipe~1ingredients~1{model_version}'
+
+  /v2/nutrition/recipe/nutritionalInfo/{model_version}:
+    $ref: './api/tags/ingredients_and_nutritional_information.yaml#~1v2~1nutrition~1recipe~1nutritionalInfo~1{model_version}'
+
+  /v2/nutrition/confirm/ingredients:
+    $ref: './api/tags/ingredients_and_nutritional_information.yaml#~1v2~1nutrition~1confirm~1ingredients'
+
+  /v2/nutrition/confirm/quantity:
+    $ref: './api/tags/ingredients_and_nutritional_information.yaml#~1v2~1nutrition~1confirm~1quantity'
+
+  /v2/nutrition/getRecommendedDailyIntake:
+    $ref: './api/tags/ingredients_and_nutritional_information.yaml#~1v2~1nutrition~1getRecommendedDailyIntake'
+
+  ################################################
+  ##  Dataset Information, Recognized Dishes and Others
+  ################################################
+
+  /v2/dataset/dishes/{model_version}:
+    $ref: './api/tags/dataset_information_recognized_dishes_and_others.yaml#~1v2~1dataset~1dishes~1{model_version}'
+
+  /v2/dataset/foodGroups:
+    $ref: './api/tags/dataset_information_recognized_dishes_and_others.yaml#~1v2~1dataset~1foodGroups'
+
+  /v2/dataset/ingredients:
+    $ref: './api/tags/dataset_information_recognized_dishes_and_others.yaml#~1v2~1dataset~1ingredients'
+
+  /v2/dataset/foodGroupsFromDish:
+    $ref: './api/tags/dataset_information_recognized_dishes_and_others.yaml#~1v2~1dataset~1foodGroupsFromDish'
+
+  ################################################
+  ##  Measures and Easy Modulation
+  ################################################
+
+  /v2/dataset/referenceIngredients:
+    $ref: './api/tags/measures_and_easy_modulation.yaml#~1v2~1dataset~1referenceIngredients'
+
+  /v2/dataset/weightMeasures/dishes:
+    $ref: './api/tags/measures_and_easy_modulation.yaml#~1v2~1dataset~1weightMeasures~1dishes'
+
+  /v2/dataset/weightMeasures/ingredients:
+    $ref: './api/tags/measures_and_easy_modulation.yaml#~1v2~1dataset~1weightMeasures~1ingredients'
+
+  ################################################
+  ##  APIUsers Profile Management
+  ################################################
+
+  /v2/profile/changeLanguage:
+    $ref: './api/tags/apiusers_profile_management.yaml#~1v2~1profile~1changeLanguage'
+
+  /v2/profile/modifyUserProfileInfo:
+    $ref: './api/tags/apiusers_profile_management.yaml#~1v2~1profile~1modifyUserProfileInfo'
+
+  /v2/profile/getUserProfileInfo:
+    $ref: './api/tags/apiusers_profile_management.yaml#~1v2~1profile~1getUserProfileInfo'
+
+  ################################################
+  ##  API and Models Versioning Functions
+  ################################################
+
+  /v2/version/activeModels:
+    $ref: './api/tags/api_and_models_versioning_functions.yaml#~1v2~1version~1activeModels'
+
+  /v2/version/activeAPIs:
+    $ref: './api/tags/api_and_models_versioning_functions.yaml#~1v2~1version~1activeAPIs'
+
+  /v2/version/allModels:
+    $ref: './api/tags/api_and_models_versioning_functions.yaml#~1v2~1version~1allModels'
+
+  ################################################
+  ##  Intake History
+  ################################################
+
+  /v2/intake/{imageId}:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1{imageId}'
+
+  /v2/intake/manualInput:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1manualInput'
+
+  /v2/intake/manualInput/assign:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1manualInput~1assign'
+
+  /v2/intake/manualInput/{userId}:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1manualInput~1{userId}'
+
+  /v2/intake/manualInput/bulkAssign:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1manualInput~1bulkAssign'
+
+  /v2/intake/modifyNutritionalInfo:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1modifyNutritionalInfo'
+
+  /v2/intake/modifyTimestamp:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1modifyTimestamp'
+
+  /v2/intake/modifyOccasion:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1modifyOccasion'
+
+  /v2/intake/barcode_scan/{barcode_id}:
+    $ref: './api/tags/intake_history.yaml#~1v2~1intake~1barcode_scan~1{barcode_id}'
+
+  /v2/barcode_scan/{barcode_id}:
+    $ref: './api/tags/intake_history.yaml#~1v2~1barcode_scan~1{barcode_id}'
+
+  /v2/history/getTotalIntakeByDay/{date}:
+    $ref: './api/tags/intake_history.yaml#~1v2~1history~1getTotalIntakeByDay~1{date}'
+
+  /v2/history/getIntakesList:
+    $ref: './api/tags/intake_history.yaml#~1v2~1history~1getIntakesList'
+
+  /v2/history/getDailySummary:
+    $ref: './api/tags/intake_history.yaml#~1v2~1history~1getDailySummary'
+
+  /v2/history/getWeeklySummary:
+    $ref: './api/tags/intake_history.yaml#~1v2~1history~1getWeeklySummary'
+
+  /v2/history/hasIntake:
+    $ref: './api/tags/intake_history.yaml#~1v2~1history~1hasIntake'
+
+  ################################################
+  ## Custom Occasions
+  ################################################
+
+  /v2/intake/createOccasionGroup:
+    $ref: './api/tags/custom_occasions.yaml#~1v2~1intake~1createOccasionGroup'
+
+  /v2/intake/getOccasionGroups:
+    $ref: './api/tags/custom_occasions.yaml#~1v2~1intake~1getOccasionGroups'
+
+  /v2/intake/createOccasionTranslation:
+    $ref: './api/tags/custom_occasions.yaml#~1v2~1intake~1createOccasionTranslation'
+
+  ################################################
+  ## Nutritional Goals
+  ################################################
+
+  /v2/nutritionalGoals:
+    $ref: './api/tags/nutritional_goals.yaml#~1v2~1nutritionalGoals'
+
+  /v2/nutritionalGoals/autocompute:
+    $ref: './api/tags/nutritional_goals.yaml#~1v2~1nutritionalGoals~1autocompute'
+
+  ################################################
+  ## Body Measures
+  ################################################
+
+  /v2/measure:
+    $ref: './api/tags/body_measures.yaml#~1v2~1measure'
+
+  /v2/user_measure:
+    $ref: './api/tags/body_measures.yaml#~1v2~1user_measure'
+
+  ################################################
+  ## Custom Nutritional Indicators
+  ################################################
+
+  /v2/custom_nutritional_indicator:
+    $ref: './api/tags/custom_nutritional_indicators.yaml#~1v2~1custom_nutritional_indicator'
+
+  /v2/custom_nutritional_indicator_translation:
+    $ref: './api/tags/custom_nutritional_indicators.yaml#~1v2~1custom_nutritional_indicator_translation'
+
+  ################################################
+  ## Custom Recipes
+  ################################################
+
+  /v2/custom_recipe:
+    $ref: './api/tags/custom_recipes.yaml#~1v2~1custom_recipe'
+
+  /v2/custom_recipe/{custom_recipe_id}:
+    $ref: './api/tags/custom_recipes.yaml#~1v2~1custom_recipe~1{custom_recipe_id}'
+
+  ################################################
+  ## ApiUserManager Endpoints
+  ################################################
+
+  /v2/managers:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers'
+
+  /v2/managers/{manager_id}:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1{manager_id}'
+
+  /v2/managers/createAPIUserManager:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1createAPIUserManager'
+
+  /v2/managers/deleteAPIUserManager/{manager_id}:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1deleteAPIUserManager~1{manager_id}'
+
+  /v2/managers/userAccess:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1userAccess'
+
+  /v2/managers/getUserProfileInfo/{userId}:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1getUserProfileInfo~1{userId}'
+
+  /v2/managers/modifyUserProfileInfo/{userId}:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1modifyUserProfileInfo~1{userId}'
+
+  /v2/managers/login:
+    $ref: './api/tags/apiusermanager_endpoints.yaml#~1v2~1managers~1login'
+
+  ################################################
+  ## Intake Variety Score and Nutri-Scores
+  ################################################
+
+  /v2/score/{imageId}/nutriScore:
+    $ref: './api/tags/intake_variety_score_and_nutriscores.yaml#~1v2~1score~1{imageId}~1nutriScore'
+
+  /v2/score/{date}/meal/{occasion}/nutriScore:
+    $ref: './api/tags/intake_variety_score_and_nutriscores.yaml#~1v2~1score~1{date}~1meal~1{occasion}~1nutriScore'
+
+  /v2/score/{date}/meal/nutriScore:
+    $ref: './api/tags/intake_variety_score_and_nutriscores.yaml#~1v2~1score~1{date}~1meal~1nutriScore'
+
+  /v2/score/variety:
+    $ref: './api/tags/intake_variety_score_and_nutriscores.yaml#~1v2~1score~1variety'
+
+  ################################################
+  ## Recipe and Dish Recommendations
+  ################################################
+
+  /v2/recommend/dish:
+    $ref: './api/tags/recipe_and_dish_recommendations.yaml#~1v2~1recommend~1dish'
+
+  /v2/recommend/recipe:
+    $ref: './api/tags/recipe_and_dish_recommendations.yaml#~1v2~1recommend~1recipe'
+
+  ################################################
+  ## APIUser Favorite Meals
+  ################################################
+
+  /v2/favorites:
+    $ref: './api/tags/apiuser_favorite_meals.yaml#~1v2~1favorites'
+
+  /v2/favorites/intake:
+    $ref: './api/tags/apiuser_favorite_meals.yaml#~1v2~1favorites~1intake'
+
+  #####################################################
+  #####  Food Quantity Estimation
+  #####################################################
+
+  /v2/image/segmentation/complete/quantity/{model_version}:
+    $ref: './api/tags/food_quantity_estimation.yaml#~1v2~1image~1segmentation~1complete~1quantity~1{model_version}'
+
+  /v2/image/segmentation/complete/quantity_depth/{model_version}:
+    $ref: './api/tags/food_quantity_estimation.yaml#~1v2~1image~1segmentation~1complete~1quantity_depth~1{model_version}'
+
+  #####################################################
+  #####  Food Waste Estimation
+  #####################################################
+
+  /v2/waste/detection/intake/{model_version}:
+    $ref: './api/tags/food_waste_estimation.yaml#~1v2~1waste~1detection~1intake~1{model_version}'
+
+  /v2/waste/detection/intake_depth/{model_version}:
+    $ref: './api/tags/food_waste_estimation.yaml#~1v2~1waste~1detection~1intake_depth~1{model_version}'
+
+  /v2/waste/confirm/{model_version}:
+    $ref: './api/tags/food_waste_estimation.yaml#~1v2~1waste~1confirm~1{model_version}'
+
+  #####################################################
+  #####  Dysphagia
+  #####################################################
+
+  /v2/dysphagia/options:
+    $ref: './api/tags/dysphagia.yaml#~1v2~1dysphagia~1options'
+
+  /v2/dysphagia/{imageId}:
+    $ref: './api/tags/dysphagia.yaml#~1v2~1dysphagia~1{imageId}'
+
+components:
+  securitySchemes:
+    Bearer: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
