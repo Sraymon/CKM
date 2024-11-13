@@ -1,49 +1,55 @@
+<!-- res/layout/activity_ckm_main.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
-    android:background="@drawable/burger">
+    android:background="@drawable/chinese_fried"
+    android:gravity="center_horizontal">
 
     <!-- Welcome Text -->
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi, Welcome to Quick Food Finder!"
+        android:gravity="center"
         android:textSize="28sp"
-        android:textColor="@color/white"
+        android:text="Welcome to Quick Food Finder"
         android:textStyle="bold"
-        android:layout_gravity="center"
         android:padding="8dp"
-        android:shadowColor="#000"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="3"/>
+        android:textColor="@color/black" />
 
-    <!-- Description Text -->
+
+    <!-- Image Banner -->
+    <ImageView
+        android:id="@+id/foodImage"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_margin="16dp"
+        android:contentDescription="Food Banner"
+        android:scaleType="centerCrop"
+        android:src="@drawable/burger" />
+
+    <!-- App Description -->
     <TextView
         android:id="@+id/appDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:gravity="center"
         android:padding="16dp"
-        android:text="Quick Food Finder helps you discover delicious meals around you and connect with food lovers. Share food pics, connect with friends, and find your next meal quickly!"
-        android:textColor="@color/white"
+        android:text="Discover delicious meals around you, connect with food lovers, share food pics, and find your next meal quickly!"
+        android:textColor="@color/black"
         android:textSize="16sp" />
+
 
     <!-- Get Started Button -->
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/darker_gray"
-        android:textStyle="bold"
-        android:elevation="8dp"
-        android:padding="16dp"
         android:text="Get Started"
-        android:textColor="@color/black" />
-
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 </LinearLayout>

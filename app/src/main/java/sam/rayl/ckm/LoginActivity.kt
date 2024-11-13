@@ -26,19 +26,21 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val loginButton: Button = findViewById(R.id.loginButton)
         val signUpButton: Button = findViewById(R.id.signupButton)
-        val backButton: ImageButton = findViewById(R.id.backButton)
+        val backButton: ImageButton = findViewById(R.id.backButton) // Back button
 
-        // Handle Back Button click (Navigate back to App_Intro)
+        // Handle Back Button click (Navigate back to MainActivity)
         backButton.setOnClickListener {
-            val intent = Intent(this, App_Intro::class.java)
+            val intent = Intent(this, CKMMainActivity::class.java) // Ensure MainActivity is declared correctly
             startActivity(intent)
-            finish()
+            finish()  // Close the LoginActivity
         }
 
         // Handle Login Button click
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
+
+            // Call Firebase login method
             loginUser(email, password)
         }
 
@@ -53,12 +55,13 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Login successful, navigate to MainActivity
-                    val intent = Intent(this, MainActivity::class.java)
+                    // Login success, navigate to AccountActivity
+                    val intent = Intent(this, UserProfileActivity::class.java)
+                    intent.putExtra("email", email)
                     startActivity(intent)
-                    finish() // Close LoginActivity
+                    finish()
                 } else {
-                    // Login failed, show error message
+                    // If login fails, display a message to the user.
                     Toast.makeText(this, "Authentication Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
