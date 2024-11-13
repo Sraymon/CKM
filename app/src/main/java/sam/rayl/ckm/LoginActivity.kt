@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -24,14 +25,20 @@ class LoginActivity : AppCompatActivity() {
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
         val loginButton: Button = findViewById(R.id.loginButton)
-        val signUpButton: Button = findViewById(R.id.signupButton) // The Sign Up button
+        val signUpButton: Button = findViewById(R.id.signupButton)
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        // Handle Back Button click (Navigate back to App_Intro)
+        backButton.setOnClickListener {
+            val intent = Intent(this, App_Intro::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         // Handle Login Button click
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
-            // Call Firebase login method
             loginUser(email, password)
         }
 
@@ -46,13 +53,12 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Login success, navigate to AccountActivity
-                    val intent = Intent(this, AccountActivity::class.java)
-                    intent.putExtra("email", email)
+                    // Login successful, navigate to MainActivity
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()
+                    finish() // Close LoginActivity
                 } else {
-                    // If login fails, display a message to the user.
+                    // Login failed, show error message
                     Toast.makeText(this, "Authentication Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }

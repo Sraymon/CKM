@@ -4,6 +4,9 @@
     <!-- Permissions to access the internet and network state -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
 
     <application
         android:allowBackup="true"
@@ -11,9 +14,9 @@
         android:theme="@style/Theme.CKM"
         tools:targetApi="31">
 
-        <!-- Main Activity -->
+        <!-- App Intro (Initial Screen) -->
         <activity
-            android:name=".CKMMainActivity"
+            android:name=".App_Intro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +27,16 @@
         <!-- Login Activity -->
         <activity android:name=".LoginActivity" />
 
+        <!-- Main Activity -->
+        <activity android:name=".MainActivity" />
+
         <!-- Account Activity -->
-        <activity android:name=".AccountActivity" />
+        <activity android:name=".UserProfileActivity" />
 
         <!-- Sign Up Activity -->
         <activity android:name=".SignUpActivity" />
+
+        <!-- Next Activity -->
 
     </application>
 </manifest>
