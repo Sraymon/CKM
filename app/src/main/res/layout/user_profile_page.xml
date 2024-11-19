@@ -15,8 +15,6 @@
         app:titleTextColor="@android:color/white" />
 
     <!-- Profile Information -->
-
-
     <ImageButton
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
@@ -34,6 +32,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
+
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
@@ -49,8 +48,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp" />
 
-    <!-- Menu Button for Popup Menu -->
-
     <!-- Edit Profile Picture Icon -->
     <ImageView
         android:id="@+id/editProfilePictureIcon"
@@ -58,7 +55,8 @@
         android:layout_height="24dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:contentDescription="Edit Profile Picture" />
+        android:contentDescription="Edit Profile Picture"
+        android:src="@drawable/ic_edit" />
 
     <!-- Description Field -->
     <EditText
@@ -84,7 +82,7 @@
         android:text="Sign Out"
         android:layout_marginTop="16dp" />
 
-    <!-- Navigation Buttons -->
+    <!-- Back Button to MainActivity -->
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"

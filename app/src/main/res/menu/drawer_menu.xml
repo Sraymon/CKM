@@ -1,12 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Home/Map -->
+    <item
+        android:id="@+id/nav_map"
+        android:title="Home"
+        android:icon="@drawable/google_maps" />
+
+    <!-- Profile -->
     <item
         android:id="@+id/nav_profile"
         android:title="Profile"
-        android:icon="@drawable/ic_profile" /> <!-- Replace with your icon -->
+        android:icon="@drawable/ic_profile" />
 
+    <!-- Create Post -->
+    <item
+        android:id="@+id/nav_create_post"
+        android:title="Create New Post"
+        android:icon="@drawable/ic_create_post" />
+
+    <!-- Settings -->
     <item
         android:id="@+id/nav_settings"
         android:title="Settings"
-        android:icon="@drawable/ic_settings" /> <!-- Replace with your icon -->
+        android:icon="@drawable/ic_settings" />
+
+    <!-- Dark Theme Switch -->
+    <item
+        android:id="@+id/nav_dark_theme"
+        android:title="Dark Theme"
+        android:icon="@drawable/themes">
+        <menu>
+            <item
+                android:id="@+id/dark_theme_toggle"
+                android:title=""
+                android:actionViewClass="android.widget.Switch" />
+        </menu>
+    </item>
+
+    <!-- Logout -->
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Sign Out"
+        android:icon="@drawable/logout" />
+
 </menu>

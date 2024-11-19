@@ -1,22 +1,29 @@
-<!-- res/layout/recipe_item.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp">
 
     <ImageView
         android:id="@+id/recipeImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"/>
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Recipe Image" />
 
     <TextView
         android:id="@+id/recipeTitleTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="Recipe Title"
         android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/black" />
 </LinearLayout>

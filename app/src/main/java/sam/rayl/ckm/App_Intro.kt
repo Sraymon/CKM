@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
-class CKMMainActivity : AppCompatActivity() {
+class AppIntro : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ckmmainactivity)  // Make sure this layout file exists
+        setContentView(R.layout.app_intro)
 
         // Reference the Get Started button
         val getStartedButton: Button = findViewById(R.id.getStartedButton)

@@ -28,20 +28,23 @@ class LoginActivity : AppCompatActivity() {
         val signUpButton: Button = findViewById(R.id.signupButton)
         val backButton: ImageButton = findViewById(R.id.backButton) // Back button
 
-        // Handle Back Button click (Navigate back to MainActivity)
+        // Handle Back Button click (Navigate back to App Intro)
         backButton.setOnClickListener {
-            val intent = Intent(this, CKMMainActivity::class.java) // Ensure MainActivity is declared correctly
+            val intent = Intent(this, AppIntro::class.java) // Ensure AppIntro is the starting screen
             startActivity(intent)
             finish()  // Close the LoginActivity
         }
 
         // Handle Login Button click
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-            // Call Firebase login method
-            loginUser(email, password)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                loginUser(email, password)
+            } else {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Handle Sign Up Button click - Navigate to SignUpActivity
@@ -55,8 +58,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Login success, navigate to AccountActivity
-                    val intent = Intent(this, UserProfileActivity::class.java)
+                    // Login success, navigate to MainActivity
+                    val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
                     finish()

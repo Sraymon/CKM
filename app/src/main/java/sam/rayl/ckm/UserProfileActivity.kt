@@ -30,6 +30,7 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var editTextDescription: EditText
     private lateinit var buttonSaveProfile: Button
     private lateinit var menuButton: ImageButton
+    private lateinit var backButton: ImageButton
 
     // Image URI
     private var selectedImageUri: Uri? = null
@@ -54,6 +55,7 @@ class UserProfileActivity : AppCompatActivity() {
         editTextDescription = findViewById(R.id.editTextDescription)
         buttonSaveProfile = findViewById(R.id.buttonSaveProfile)
         menuButton = findViewById(R.id.menuButton)
+        backButton = findViewById(R.id.backButton)
 
         // Display email passed from the LoginActivity
         val email = intent.getStringExtra("email")
@@ -65,6 +67,14 @@ class UserProfileActivity : AppCompatActivity() {
         // Set up the popup menu
         menuButton.setOnClickListener { view ->
             showPopupMenu(view)
+        }
+
+        // Handle back button click to navigate to MainActivity
+        backButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
         }
 
         // Handle profile picture edit icon click
@@ -82,11 +92,9 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun showPopupMenu(view: View) {
-        // Create a PopupMenu
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.profile_menu, popupMenu.menu)
 
-        // Set click listener for menu items
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.action_capture_food -> {
@@ -100,8 +108,6 @@ class UserProfileActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-        // Show the PopupMenu
         popupMenu.show()
     }
 
@@ -150,7 +156,6 @@ class UserProfileActivity : AppCompatActivity() {
         } else if (requestCode == REQUEST_CODE_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             profilePicture.setImageBitmap(imageBitmap)
-            // Optionally, upload or process the captured image
         }
     }
 
