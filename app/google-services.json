@@ -25,5 +25,21 @@
       }
     }
   ],
-  "configuration_version": "1"
+  "configuration_version": "1",
+
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  },
+  "chats": {
+    "chatRoom1": {
+      "messages": {
+        "message1": {
+          "sender": "user1",
+          "text": "Hello!",
+          "timestamp": 123456789
+        }
+      }
+    }
+  }
 }
